@@ -159,7 +159,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
     make clean;make
     ```
 
-- 预测运行配置config的目录结构如下：
+- 预测运行配置config的目录结构如下（可通过C-API/download.sh下载获得）：
 ```text
 .
 ├─Senta       # 情感倾向分析模型
@@ -181,7 +181,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
     ```
 
 ## 已有模型及其性能
-我们在C-API/models目录下给出了bilstm_net模型的下载脚本download.sh，可供用户下载使用（模型可支持C-API、python两种预测方式），该模型在百度自建数据集上的效果分类准确率为90%。
+我们在C-API目录下给出了bilstm_net模型的下载脚本download.sh，可供用户下载使用（模型可支持C-API、python两种预测方式），该模型在百度自建数据集上的效果分类准确率为90%。
 
 ## 如何贡献代码
 
