@@ -69,7 +69,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
         --train_data_path ./data/train_data/corpus.train \          # 训练数据路径
         --word_dict_path ./data/train.vocab \                       # 词典路径
         --mode train \                                              # train模式
-        --model_path ./Senta_models                                 # 模型保存路径
+        --model_path ./models                                       # 模型保存路径
     ```
 
 ### 模型评价
@@ -78,7 +78,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
         --test_data_path ./data/test_data/corpus.test \             # 测试数据路径
         --word_dict_path ./data/train.vocab \                       # 词典路径
         --mode eval \                                               # eval模式
-        --model_path ./Senta_models/epoch0/                         # 预测模型路径
+        --model_path ./models/epoch0/                               # 预测模型路径
     ```
 ### 模型预测(python)
     ```
@@ -86,7 +86,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
         --test_data_path ./data/test_data/corpus.test \             # 测试数据路径
         --word_dict_path ./data/train.vocab \                       # 词典路径
         --mode infer \                                              # infer模式
-        --model_path ./Senta_models/epoch0/                         # 预测模型路径
+        --model_path ./models/epoch0/                               # 预测模型路径
     ```
 ### 模型预测（C-API）
     本教程还提供了C-API的预测方式，C-API中接入了lac模块（github/baidu/lac）用于分词处理，调用C-API的方式如下所示：
@@ -181,8 +181,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
     ```
 
 ## 已有模型及其性能
-我们在models目录下给出了bilstm_net模型(models/Senta)以及对应的词典(models/train.vocab)，该模型在百度自建数据集
-上的效果分类准确率为90%。
+我们在C-API/models目录下给出了bilstm_net模型的下载脚本download.sh，可供用户下载使用（模型可支持C-API、python两种预测方式），该模型在百度自建数据集上的效果分类准确率为90%。
 
 ## 如何贡献代码
 
