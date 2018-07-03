@@ -64,6 +64,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
 
 ## 模型训练与预测
 ### 模型训练
+    
     ```
     python sentiment_classify.py \
         --train_data_path ./data/train_data/corpus.train \          # 训练数据路径
@@ -73,6 +74,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
     ```
 
 ### 模型评价
+    
     ```
     python sentiment_classify.py \
         --test_data_path ./data/test_data/corpus.test \             # 测试数据路径
@@ -81,6 +83,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
         --model_path ./models/epoch0/                               # 预测模型路径
     ```
 ### 模型预测(python)
+    
     ```
     python sentiment_classify.py \
         --test_data_path ./data/test_data/corpus.test \             # 测试数据路径
