@@ -1,7 +1,7 @@
 # 情感倾向分析
 
 ## 版本要求
-运行本目录下的程序示例需要使用PaddlePaddle v1.0 版本。如果您的PaddlePaddle安装版本低于此要求，请按照[安装文档](http://paddlepaddle.org/documentation/docs/zh/1.0/beginners_guide/install/Start.html#paddlepaddle) 中的说明更新PaddlePaddle安装版本。
+运行本目录下的程序示例需要使用PaddlePaddle v1.0 版本。如果您的PaddlePaddle安装版本低于此要求，请按照[安装文档](http://paddlepaddle.org/documentation/docs/zh/1.0/beginners_guide/install/Start.html#paddlepaddle)中的说明更新PaddlePaddle安装版本。
 
 ## 目录
 - [代码结构](#代码结构)
