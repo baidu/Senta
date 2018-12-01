@@ -1,8 +1,7 @@
 # 情感倾向分析
 
 ## 版本要求
-运行本目录下的程序示例需要使用PaddlePaddle v1.0 版本。如果您的PaddlePaddle安装版本低于此要求，请按照[安装文档]
-(http://paddlepaddle.org/documentation/docs/zh/1.0/beginners_guide/install/Start.html#paddlepaddle) 中的说明更新PaddlePaddle安装版本。
+运行本目录下的程序示例需要使用PaddlePaddle v1.0 版本。如果您的PaddlePaddle安装版本低于此要求，请按照[安装文档](http://paddlepaddle.org/documentation/docs/zh/1.0/beginners_guide/install/Start.html#paddlepaddle) 中的说明更新PaddlePaddle安装版本。
 
 ## 目录
 - [代码结构](#代码结构)
@@ -28,10 +27,10 @@
 ## 简介
 情感倾向分析针对带有主观描述的中文文本，可自动判断该文本的情感极性类别并给出相应的置信度。情感类型分为积极、消极、
 中性。情感倾向分析能够帮助企业理解用户消费习惯、分析热点话题和危机舆情监控，为企业提供有力的决策支持。本次我们开放
-AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/sentiment_classify )， 提供给用户使用。
+AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/sentiment_classify)， 提供给用户使用。
 
 ### 模型概览
-`nets.py` 中包含一下模型：
+`nets.py` 中包含以下模型：
 
 1. `bow_net`：Bow(Bag Of Words)模型，是一个非序列模型。使用基本的全连接结构。
 2. `cnn_net`：浅层CNN模型，是一个基础的序列模型，能够处理变长的序列输入，提取一个局部区域之内的特征。

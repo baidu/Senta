@@ -25,7 +25,7 @@ def get_predict_label(pos_prob):
 
 def to_lodtensor(data, place):
     """
-    convert ot LODtensor
+    convert to LODtensor
     """
     seq_lens = [len(seq) for seq in data]
     cur_len = 0
