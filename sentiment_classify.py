@@ -7,7 +7,7 @@ import argparse
 import ast
 
 import paddle.fluid as fluid
-import paddle.v2 as paddle
+import paddle
 
 import utils
 from nets import bow_net

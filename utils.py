@@ -5,7 +5,7 @@ import numpy as np
 import random
 
 import paddle.fluid as fluid
-import paddle.v2 as paddle
+import paddle
 
 def get_predict_label(pos_prob):
     neg_prob = 1 - pos_prob
