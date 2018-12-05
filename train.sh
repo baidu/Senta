@@ -1,4 +1,6 @@
-export CUDA_VISIBLE_DEVICES=4,5         # 声明可用的 GPU
+export CUDA_VISIBLE_DEVICES=0           # available GPU indices
+export OPENBLAS_NUM_THREADS=4           # available cpu threads (for openblas setting)
+export MKL_NUM_threads=4                # available cpu threads (for mkl setting)
 python sentiment_classify.py \
     --model_type bilstm_net \
     --train_data_path ./data/train_data/corpus.train \

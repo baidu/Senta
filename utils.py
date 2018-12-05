@@ -99,7 +99,7 @@ def prepare_data(data_path, word_dict_path,
     word_dict = load_vocab(word_dict_path)
     if mode == "train":
         train_reader = paddle.batch(data_reader(data_path, word_dict, True),
-            batch_size)
+            batch_size, drop_last=True)
         return word_dict, train_reader
     else:
         test_reader = paddle.batch(data_reader(data_path, word_dict, False),
