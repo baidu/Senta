@@ -5,6 +5,7 @@ import contextlib
 import logging
 import argparse
 import ast
+import numpy as np
 
 import paddle.fluid as fluid
 import paddle
@@ -122,23 +123,10 @@ def train_net(train_reader,
         name="words", shape=[1], dtype="int64", lod_level=1)
     # label data
     label = fluid.layers.data(name="label", shape=[1], dtype="int64")
-
-    if not parallel:
-        # set network
-        cost, acc, pred = network(data, label, len(word_dict) + 1)
-    else:
-        places = fluid.layers.get_places(device_count=2)
-        pd = fluid.layers.ParallelDo(places)
-        with pd.do():
-            # set network
-            cost, acc, prediction = network(
-                pd.read_input(data), pd.read_input(label), len(word_dict) + 1)
-            pd.write_output(cost)
-            pd.write_output(acc)
-        cost, acc = pd()
-        cost = fluid.layers.mean(cost)
-        acc = fluid.layers.mean(acc)
-
+    cost, acc, pred = network(data, label, len(word_dict) + 1)
+    cost = fluid.layers.mean(cost)
+    acc = fluid.layers.mean(acc)
+    
     # set optimizer
     sgd_optimizer = fluid.optimizer.Adagrad(learning_rate=lr)
     sgd_optimizer.minimize(cost)
@@ -147,19 +135,24 @@ def train_net(train_reader,
     place = fluid.CUDAPlace(0) if use_gpu else fluid.CPUPlace()
     exe = fluid.Executor(place)
     feeder = fluid.DataFeeder(feed_list=[data, label], place=place)
-
+    
+    # initilize parameters
     exe.run(fluid.default_startup_program())
+    # parallelize it 
+    train_exe = fluid.ParallelExecutor(use_cuda=use_gpu, loss_name=cost.name) \
+        if args.is_parallel else exe
+    
     # start training...
     for pass_id in xrange(pass_num):
         data_size, data_count, total_acc, total_cost = 0, 0, 0.0, 0.0
         for data in train_reader():
             # train a batch
-            avg_cost_np, avg_acc_np = exe.run(fluid.default_main_program(),
-                feed=feeder.feed(data), fetch_list=[cost, acc])
+            avg_cost_np, avg_acc_np = train_exe.run(
+                feed=feeder.feed(data), fetch_list=[cost.name, acc.name])
             data_size = len(data)
-            total_acc += data_size * avg_acc_np
-            total_cost += data_size * avg_cost_np
-            data_count += data_size
+            total_acc += data_size * np.sum(avg_acc_np)
+            total_cost += data_size * np.sum(avg_cost_np)
+            data_count += data_size * len(avg_acc_np)
         avg_cost = total_cost / data_count
         avg_acc = total_acc / data_count
         print("[train info]: pass_id: %d, avg_acc: %f, avg_cost: %f" %
