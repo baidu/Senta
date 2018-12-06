@@ -16,13 +16,16 @@
 以下是本例目录包含的文件以及对应说明：
 
 ```text
-.
-
-├── sentiment.py        # 情感倾向分析主函数，包括训练、预估、预测部分
-├── nets.py             # 本例中涉及的各种网络结构均定义在此文件中，若进一步修改模型结构，请查看此文件
-├── utils.py            # 定义通用的函数，例如加载词典，读入数据等
-├── README.md           # 说明文档
-├── C-API               # 模型预测C-API接口
+Senta
+├── C-API/                         # # 模型预测C-API接口
+├── data/                          # 数据集
+├── eval.sh                         # 模型评价脚本
+├── infer.sh                        # 模型预测脚本
+├── nets.py                         # 本例中涉及的各种网络结构均定义在此文件中，若进一步修改模型结构，请查看此文件
+├── README.md                       # 说明文档
+├── sentiment_classify.py           # 情感倾向分析主函数，包括训练、预估、预测部分
+├── train.sh                        # 模型训练脚本
+└── utils.py                        # 定义通用的函数，例如加载词典，读入数据等
 ```
 
 ## 简介
@@ -63,6 +66,9 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
     注：我们在data目录下，提供了示例词典数据，详见data/train.vocab
 
 ## 模型训练与预测
+
+模型的训练，评价和预测可以参考如下的命令，也可以在提供的 `train.sh`, `eval.py`, `infer.sh` 的基础上改，关于 `sentiment_classify.py` 具体支持的参数，可以使用 `python sentiment_classift.py --help` 查看。
+
 ### 模型训练
 ```bash
     python sentiment_classify.py \
