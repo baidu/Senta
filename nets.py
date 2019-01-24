@@ -1,9 +1,5 @@
-import sys
-import time
-import numpy as np
-
 import paddle.fluid as fluid
-import paddle.v2 as paddle
+
 
 def bow_net(data,
             label,
@@ -30,6 +26,7 @@ def bow_net(data,
     acc = fluid.layers.accuracy(input=prediction, label=label)
 
     return avg_cost, acc, prediction
+
 
 def cnn_net(data,
             label,
@@ -62,6 +59,7 @@ def cnn_net(data,
     acc = fluid.layers.accuracy(input=prediction, label=label)
 
     return avg_cost, acc, prediction
+
 
 def lstm_net(data,
              label,
@@ -100,6 +98,7 @@ def lstm_net(data,
     acc = fluid.layers.accuracy(input=prediction, label=label)
 
     return avg_cost, acc, prediction
+
 
 def bilstm_net(data,
                label,
@@ -148,6 +147,7 @@ def bilstm_net(data,
     acc = fluid.layers.accuracy(input=prediction, label=label)
 
     return avg_cost, acc, prediction
+
 
 def gru_net(data,
             label,

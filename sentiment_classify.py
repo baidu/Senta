@@ -1,13 +1,8 @@
-import sys
-import time
-import unittest
-import contextlib
 import logging
 import argparse
 import ast
 
 import paddle.fluid as fluid
-import paddle.v2 as paddle
 
 import utils
 from nets import bow_net
@@ -18,6 +13,7 @@ from nets import gru_net
 
 logger = logging.getLogger("paddle-fluid")
 logger.setLevel(logging.INFO)
+
 
 def parse_args():
     parser = argparse.ArgumentParser("Sentiment Classification.")
@@ -92,15 +88,16 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+
 def train_net(train_reader,
-        word_dict,
-        network,
-        use_gpu,
-        parallel,
-        save_dirname,
-        lr=0.002,
-        batch_size=128,
-        pass_num=30):
+              word_dict,
+              network,
+              use_gpu,
+              parallel,
+              save_dirname,
+              lr=0.002,
+              batch_size=128,
+              pass_num=30):
     """
     train network
     """
@@ -150,12 +147,13 @@ def train_net(train_reader,
 
     exe.run(fluid.default_startup_program())
     # start training...
-    for pass_id in xrange(pass_num):
+    for pass_id in range(pass_num):
         data_size, data_count, total_acc, total_cost = 0, 0, 0.0, 0.0
         for data in train_reader():
             # train a batch
             avg_cost_np, avg_acc_np = exe.run(fluid.default_main_program(),
-                feed=feeder.feed(data), fetch_list=[cost, acc])
+                                              feed=feeder.feed(data),
+                                              fetch_list=[cost, acc])
             data_size = len(data)
             total_acc += data_size * avg_acc_np
             total_cost += data_size * avg_cost_np
@@ -163,10 +161,11 @@ def train_net(train_reader,
         avg_cost = total_cost / data_count
         avg_acc = total_acc / data_count
         print("[train info]: pass_id: %d, avg_acc: %f, avg_cost: %f" %
-            (pass_id, avg_acc, avg_cost))
+              (pass_id, avg_acc, avg_cost))
         epoch_model = save_dirname + "/" + "epoch" + str(pass_id)
         # save the model
         fluid.io.save_inference_model(epoch_model, ["words"], pred, exe)
+
 
 def eval_net(test_reader, use_gpu, model_path=None):
     """
@@ -192,9 +191,9 @@ def eval_net(test_reader, use_gpu, model_path=None):
         for data in test_reader():
             # infer a batch
             pred = exe.run(inference_program,
-                feed=utils.data2tensor(data, place),
-                fetch_list=fetch_targets,
-                return_numpy=True)
+                           feed=utils.data2tensor(data, place),
+                           fetch_list=fetch_targets,
+                           return_numpy=True)
             for i, val in enumerate(data):
                 class3_label, class2_label = utils.get_predict_label(pred[0][i, 1])
                 true_label = val[1]
@@ -210,14 +209,15 @@ def eval_net(test_reader, use_gpu, model_path=None):
         class2_acc = class2_acc / (total_count - neu_count)
         class3_acc = class3_acc / total_count
         print("[test info] model_path: %s, class2_acc: %f, class3_acc: %f" %
-            (model_path, class2_acc, class3_acc))
+              (model_path, class2_acc, class3_acc))
+
 
 def infer_net(test_reader, use_gpu, model_path=None):
     """
     Inference function
     """
     if model_path is None:
-        print (str(model_path) + "can not be found")
+        print(str(model_path) + "can not be found")
         return
     # set place, executor
     place = fluid.CUDAPlace(0) if use_gpu else fluid.CPUPlace()
@@ -232,15 +232,17 @@ def infer_net(test_reader, use_gpu, model_path=None):
         for data in test_reader():
             # infer a batch
             pred = exe.run(inference_program,
-                feed=utils.data2tensor(data, place),
-                fetch_list=fetch_targets,
-                return_numpy=True)
+                           feed=utils.data2tensor(data, place),
+                           fetch_list=fetch_targets,
+                           return_numpy=True)
             for i, val in enumerate(data):
                 class3_label, class2_label = utils.get_predict_label(pred[0][i, 1])
                 pos_prob = pred[0][i, 1]
                 neg_prob = 1 - pos_prob
                 print("predict label: %d, pos_prob: %f, neg_prob: %f" %
-                    (class3_label, pos_prob, neg_prob))
+                      (class3_label, pos_prob, neg_prob))
+
+
 def main(args):
 
     # train mode
@@ -282,6 +284,7 @@ def main(args):
             test_reader,
             args.use_gpu,
             args.model_path)
+
 
 if __name__ == "__main__":
     args = parse_args()
