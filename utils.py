@@ -1,11 +1,9 @@
 import os
-import sys
-import time
 import numpy as np
 import random
 
 import paddle.fluid as fluid
-import paddle.v2 as paddle
+
 
 def get_predict_label(pos_prob):
     neg_prob = 1 - pos_prob
@@ -22,6 +20,7 @@ def get_predict_label(pos_prob):
     else:
         class2_label = 0
     return class3_label, class2_label
+
 
 def to_lodtensor(data, place):
     """
@@ -40,12 +39,14 @@ def to_lodtensor(data, place):
     res.set_lod([lod])
     return res
 
+
 def data2tensor(data, place):
     """
     data2tensor
     """
     input_seq = to_lodtensor(map(lambda x: x[0], data), place)
     return {"words": input_seq}
+
 
 def data_reader(file_path, word_dict, is_shuffle=True):
     """
@@ -68,6 +69,7 @@ def data_reader(file_path, word_dict, is_shuffle=True):
             yield doc, label
     return reader
 
+
 def load_vocab(file_path):
     """
     load the given vocabulary
@@ -83,7 +85,7 @@ def load_vocab(file_path):
 
 
 def prepare_data(data_path, word_dict_path,
-    batch_size, mode):
+                 batch_size, mode):
     """
     prepare data
     """
@@ -98,10 +100,10 @@ def prepare_data(data_path, word_dict_path,
 
     word_dict = load_vocab(word_dict_path)
     if mode == "train":
-        train_reader = paddle.batch(data_reader(data_path, word_dict, True),
-            batch_size)
+        train_reader = fluid.batch(data_reader(data_path, word_dict, True),
+                                   batch_size, True)
         return word_dict, train_reader
     else:
-        test_reader = paddle.batch(data_reader(data_path, word_dict, False),
-            batch_size)
+        test_reader = fluid.batch(data_reader(data_path, word_dict, False),
+                                  batch_size, True)
         return word_dict, test_reader
