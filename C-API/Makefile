@@ -16,7 +16,7 @@ DEP_LDFLAGS= -L${PADDLE_ROOT}/paddle/fluid/inference \
 			 -L${PADDLE_ROOT}/third_party/install/mklml/lib/ -lmklml_intel \
 			 -L${PADDLE_ROOT}/third_party/install/mklml/lib/ -liomp5 \
 
-DEP_LDLIBS= -llac -lpcre -lpthread -lcrypto -lm -lgflags -lpaddle_fluid -lrt -ldl 
+DEP_LDLIBS= -llac -lpthread -lcrypto -lm -lgflags -lpaddle_fluid -lrt -ldl 
 
 CXX=${GCC_BIN}
 CC=$(CXX) $(CFLAGS)
