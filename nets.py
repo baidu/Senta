@@ -41,7 +41,7 @@ def cnn_net(data,
     """
     # embedding layer
     emb = fluid.layers.embedding(input=data, size=[dict_dim, emb_dim])
-    
+
     # convolution layer
     conv_3 = fluid.nets.sequence_conv_pool(
         input=emb,
@@ -49,7 +49,7 @@ def cnn_net(data,
         filter_size=win_size,
         act="tanh",
         pool_type="max")
-    
+
     # full connect layer
     fc_1 = fluid.layers.fc(input=[conv_3], size=hid_dim2)
     # softmax layer
@@ -77,17 +77,17 @@ def lstm_net(data,
         input=data,
         size=[dict_dim, emb_dim],
         param_attr=fluid.ParamAttr(learning_rate=emb_lr))
-    
+
     # Lstm layer
     fc0 = fluid.layers.fc(input=emb, size=hid_dim * 4)
 
     lstm_h, c = fluid.layers.dynamic_lstm(
         input=fc0, size=hid_dim * 4, is_reverse=False)
-    
+
     # max pooling layer
     lstm_max = fluid.layers.sequence_pool(input=lstm_h, pool_type='max')
     lstm_max_tanh = fluid.layers.tanh(lstm_max)
-    
+
     # full connect layer
     fc1 = fluid.layers.fc(input=lstm_max_tanh, size=hid_dim2, act='tanh')
     # softmax layer
@@ -116,7 +116,7 @@ def bilstm_net(data,
         input=data,
         size=[dict_dim, emb_dim],
         param_attr=fluid.ParamAttr(learning_rate=emb_lr))
-    
+
     # bi-lstm layer
     fc0 = fluid.layers.fc(input=emb, size=hid_dim * 4)
 
@@ -127,17 +127,17 @@ def bilstm_net(data,
 
     rlstm_h, c = fluid.layers.dynamic_lstm(
         input=rfc0, size=hid_dim * 4, is_reverse=True)
-    
+
     # extract last layer
     lstm_last = fluid.layers.sequence_last_step(input=lstm_h)
     rlstm_last = fluid.layers.sequence_last_step(input=rlstm_h)
 
     lstm_last_tanh = fluid.layers.tanh(lstm_last)
     rlstm_last_tanh = fluid.layers.tanh(rlstm_last)
-    
+
     # concat layer
     lstm_concat = fluid.layers.concat(input=[lstm_last, rlstm_last], axis=1)
-    
+
     # full connect layer
     fc1 = fluid.layers.fc(input=lstm_concat, size=hid_dim2, act='tanh')
     # softmax layer
@@ -180,4 +180,3 @@ def gru_net(data,
     acc = fluid.layers.accuracy(input=prediction, label=label)
 
     return avg_cost, acc, prediction
-
