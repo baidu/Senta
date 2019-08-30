@@ -113,7 +113,7 @@ def train_net(train_reader,
     elif network == "gru_net":
         network = gru_net
     else:
-        print ("unknown network type")
+        print("unknown network type")
         return
     # word seq data
     data = fluid.layers.data(
@@ -147,8 +147,8 @@ def train_net(train_reader,
         for data in train_reader():
             # train a batch
             avg_cost_np, avg_acc_np = train_exe.run(
-                                              feed=feeder.feed(data),
-                                              fetch_list=[cost.name, acc.name])
+                feed=feeder.feed(data),
+                fetch_list=[cost.name, acc.name])
             data_size = len(data)
             total_acc += data_size * np.sum(avg_acc_np)
             total_cost += data_size * np.sum(avg_cost_np)
@@ -167,7 +167,7 @@ def eval_net(test_reader, use_gpu, model_path=None):
     Evaluation function
     """
     if model_path is None:
-        print (str(model_path) + "can not be found")
+        print(str(model_path) + "can not be found")
         return
     # set place, executor
     place = fluid.CUDAPlace(0) if use_gpu else fluid.CPUPlace()
@@ -178,7 +178,7 @@ def eval_net(test_reader, use_gpu, model_path=None):
         # load the saved model
         [inference_program, feed_target_names,
             fetch_targets] = fluid.io.load_inference_model(model_path, exe)
-        
+
         # compute 2class and 3class accuracy
         class2_acc, class3_acc = 0.0, 0.0
         total_count, neu_count = 0, 0
@@ -246,7 +246,7 @@ def main(args):
         word_dict, train_reader = utils.prepare_data(
             args.train_data_path, args.word_dict_path, args.batch_size,
             args.mode)
-        
+
         train_net(
             train_reader,
             word_dict,
@@ -257,10 +257,10 @@ def main(args):
             args.lr,
             args.batch_size,
             args.num_passes)
-    
+
     # eval mode
     elif args.mode == "eval":
-        # prepare_data to get word_dict, test_reader    
+        # prepare_data to get word_dict, test_reader
         word_dict, test_reader = utils.prepare_data(
             args.test_data_path, args.word_dict_path, args.batch_size,
             args.mode)
@@ -268,7 +268,7 @@ def main(args):
             test_reader,
             args.use_gpu,
             args.model_path)
-    
+
     # infer mode
     elif args.mode == "infer":
         # prepare_data to get word_dict, test_reader
@@ -283,4 +283,4 @@ def main(args):
 
 if __name__ == "__main__":
     args = parse_args()
-    main(args) 
+    main(args)
