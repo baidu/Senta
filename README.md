@@ -137,7 +137,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
 - 克隆lac代码，修改Makefile 
     ```
     cd fluid_install_dir/third_party/install/
-    git clone https://github.com/baidu/lac
+    git clone https://github.com/baidu/lac.git
 
     修改CMakeList.txt, 将:
     SET(PADDLE_ROOT ../../../fluid_install_dir)
