@@ -156,7 +156,7 @@ AI开放平台中情感倾向分析采用的模型(http://ai.baidu.com/tech/nlp/
 - 克隆本模块代码，添加环境变量，编译
         
     ```
-    git clone https://github.com/baidu/Senta
+    git clone https://github.com/baidu/Senta.git
     export PADDLE_ROOT=你的PaddlePaddle Fluid Inference部署路径
     export GCC_BIN=你的g++绝对路径（4.8.2版本）
     cd C-API
