@@ -169,7 +169,7 @@ SKEP是百度研究团队提出的基于情感知识增强的情感预训练算�
 
 ### 安装方法
 
-本仓库支持pip安装和源码安装两种方式，使用pip或者源码安装时需要先安装PaddlePaddle。
+本仓库支持pip安装和源码安装两种方式，使用pip或者源码安装时需要先安装PaddlePaddle[安装文档](https://www.paddlepaddle.org.cn/install/quick)。
 
 1. pip安装
 ```shell
