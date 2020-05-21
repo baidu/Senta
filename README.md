@@ -391,7 +391,7 @@ print(result)
 
 5. 该代码同时支持用户进一步开发使用，可以根据配置文件中设置相关数据、模型、优化器，以及修改模型的超参数进行二次开发训练。
 
-6. 本代码库目前仅支持基于SKEP情感预训练模型进行训练和预测，如果用户希望使用Bow、CNN、LSTM等轻量级模型，请移步至上一版本Senta[Senta v1](https://github.com/baidu/Senta/tree/v1)使用。
+6. 本代码库目前仅支持基于SKEP情感预训练模型进行训练和预测，如果用户希望使用Bow、CNN、LSTM等轻量级模型，请移步至[Senta v1](https://github.com/baidu/Senta/tree/v1)使用。
 
 
 ## Demo数据集说明
