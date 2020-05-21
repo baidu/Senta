@@ -91,7 +91,7 @@ SKEP是百度研究团队提出的基于情感知识增强的情感预训练算�
         <td><center>F1</td>
         <td><center>72.87</td>
         <td><center>72.90</td>
-        <td><center>暂不开放</td>
+        <td><center>暂未开放</td>
     </tr>
     <tr>
         <td><center>SE-ABSA16_PHNS</td>
