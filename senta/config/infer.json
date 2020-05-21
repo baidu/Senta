@@ -1,0 +1,233 @@
+{
+    "model_name":{
+        "ernie_1.0_skep_large_ch": {
+            "type": "1",
+            "config_path": "./model_files/config/ernie_1.0_large_ch.config.json",
+            "tokenizer":{
+                "type": "FullTokenizer",
+                "vocab_path": "./model_files/dict/ernie_1.0_large_ch.vocab.txt"
+            }
+        },
+        "ernie_2.0_skep_large_en":  {
+            "type": "2",
+            "config_path": "./model_files/config/ernie_2.0_large_en.config.json",
+            "tokenizer":{
+                "type": "FullTokenizer",
+                "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt"
+            }
+        },
+        "roberta_skep_large_en":  {
+            "type": "3",
+            "config_path": "./model_files/config/roberta_en.config.json",
+            "tokenizer":{
+                "type": "GptBpeTokenizer",
+                "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+                "params": {
+                    "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                    "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+                }
+            }
+        }
+    },
+    "task_name":{
+        "sentiment_classify": "a",
+        "aspect_sentiment_classify": "b",
+        "extraction": "c"
+    },
+    "model_class":{
+        "1a": {
+            "type": "ErnieOneSentClassificationCh",
+            "embedding": {
+                "type": "ErnieTokenEmbedding",
+                "emb_dim": 768,
+                "use_fp16": false,
+                "config_path": "./model_files/config/ernie_1.0_large_ch.config.json",
+                "other": ""
+            },
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "OneSentClassifyReaderCh",
+                "tokenizer": {
+                    "type": "FullTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_1.0_large_ch.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/ernie_1.0_skep_large_ch.Chnsenticorp.cls/save_inference_model/inference_step_601",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/1a/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/1a/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/Chnsenticorp.label_map.txt"
+        },
+        "1b": {
+            "type": "ErnieTwoSentClassificationCh",
+            "num_labels":2,
+            "embedding": {
+                  "type": "ErnieTokenEmbedding",
+                  "emb_dim": 768,
+                  "use_fp16": false,
+                  "config_path": "./model_files/config/ernie_1.0_large_ch.config.json",
+                  "other": ""
+            },
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "TwoSentClassifyReaderCh",
+                "tokenizer": {
+                    "type": "FullTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_1.0_large_ch.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/ernie_1.0_skep_large_ch.SE-ABSA16_PHNS.cls/save_inference_model/inference_step_85",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/1b/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/1b/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/SemEval2016_phone.label_map.txt"
+        },
+        "1c": {
+            "type": "ErnieCrfSeqLabel",
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "BasicDataSetReader",
+                "tokenizer": {
+                    "type": "CustomTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_1.0_large_ch.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/ernie_1.0_skep_large_ch.COTE_BD.oe/save_inference_model/inference_step_535",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/1c/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/1c/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/COTE_BD.label_map.txt",
+            "inference_type": "seq_lab"
+        },
+        "2a": {
+            "type": "ErnieOneSentClassificationEn",
+            "embedding": {
+                  "type":"ErnieTokenEmbedding",
+                  "emb_dim":768,
+                  "use_fp16":false,
+                  "config_path":"./model_files/config/ernie_2.0_large_en.config.json",
+                  "other":""
+            },
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "OneSentClassifyReaderEn",
+                "tokenizer": {
+                    "type": "FullTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/ernie_2.0_skep_large_en.SST-2.cls/save_inference_model/inference_step_2106",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/2a/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/2a/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/SST2.label_map.txt"
+        },
+        "2b": {
+            "type": "ErnieTwoSentClassificationEn",
+            "num_labels":2,
+            "embedding": {
+              "type":"ErnieTokenEmbedding",
+              "emb_dim":768,
+              "use_fp16":false,
+              "config_path":"./model_files/config/ernie_2.0_large_en.config.json",
+              "other":""
+            },
+            "is_classify": true,
+            "is_regression": false,
+            "use_bce": false,
+            "use_sigmoid": false,
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "TwoSentClassifyReaderEn",
+                "tokenizer": {
+                    "type": "FullTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/ernie_2.0_skep_large_en.absa_laptops.cls/save_inference_model/inference_step_74",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/2b/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/2b/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/absa_laptops.label_map.txt"
+        },
+        "2c": {
+            "type": "ErnieCrfSeqLabel",
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "BasicDataSetReader",
+                "tokenizer": {
+                    "type": "CustomTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/ernie_2.0_skep_large_en.MPQA.orl/save_inference_model/inference_step_197",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/2c/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/2c/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/MPQA.label_map.txt",
+            "inference_type": "seq_lab"
+        },
+        "3a": {
+            "type": "ErnieOneSentClassificationEn",
+            "embedding": {
+                "type":"ErnieTokenEmbedding",
+                "emb_dim":1024,
+                "use_fp16":false,
+                "config_path":"./model_files/config/roberta_large_en.config.json",
+                "other":""
+            },
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "OneSentClassifyReaderEn",
+                "tokenizer":{
+                    "type": "GptBpeTokenizer",
+                    "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+                    "params": {
+                        "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                        "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+                    }
+                }
+            },
+            "inference_model_path": "./model_files/roberta_skep_large_en.SST-2.cls/save_inference_model/inference_step_2106",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/3a/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/3a/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/SST2.label_map.txt"
+        },
+        "3b": {
+            "type": "RobertaOneSentClassificationEn",
+            "embedding": {
+                  "type":"ErnieTokenEmbedding",
+                  "emb_dim":1024,
+                  "use_fp16":false,
+                  "config_path":"./model_files/config/roberta_large_en.config.json",
+                  "other":""
+            },
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "RobertaTwoSentClassifyReaderEn",
+                "tokenizer":{
+                    "type": "GptBpeTokenizer",
+                    "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+                    "params": {
+                        "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                        "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+                    }
+                }
+            },
+            "inference_model_path": "./model_files/roberta_skep_large_en.absa_laptops.cls/save_inference_model/inference_step_74",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/3b/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/3b/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/absa_laptops.label_map.txt"
+        },
+        "3c": {
+            "type": "ErnieCrfSeqLabel",
+            "predict_reader": {
+                "name": "predict_reader",
+                "type": "BasicDataSetReader",
+                "tokenizer":{
+                    "type": "CustomTokenizer",
+                    "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt"
+                }
+            },
+            "inference_model_path": "./model_files/roberta_skep_large_en.MPQA.orl/save_inference_model/inference_step_132",
+            "model_file_http_url": "https://senta.bj.bcebos.com/skep/3c/model_files.tar.gz",
+            "model_md5_http_url": "https://senta.bj.bcebos.com/skep/3c/model_files.tar.gz.md5",
+            "label_map_path": "./model_files/dict/MPQA.label_map.txt",
+            "inference_type": "seq_lab"
+        }
+    }
+}

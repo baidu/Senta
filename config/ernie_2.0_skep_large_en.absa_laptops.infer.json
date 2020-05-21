@@ -1,0 +1,119 @@
+{
+  "dataset_reader": {
+    "predict_reader": {
+      "name": "predict_reader",
+      "type": "TwoSentClassifyReaderEn",
+      "fields": [
+        {
+          "name": "qid",
+          "data_type": "int",
+          "reader": {"type": "ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1, 
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": null
+        },
+        {
+          "name": "text_a",
+          "data_type": "string",
+          "reader": {"type":"ErnieTextFieldReader"},
+          "tokenizer":{
+              "type":"FullTokenizer",
+              "split_char":" ",
+              "unk_token":"[UNK]"
+            },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": {
+            "type":"ErnieTokenEmbedding",
+            "use_reader_emb":false,
+            "emb_dim":768,
+            "config_path":"./model_files/config/ernie_2.0_large_en.config.json",
+            "other":""
+          }
+        },
+        {
+          "name": "text_b",
+          "data_type": "string",
+          "reader": {"type":"ErnieTextFieldReader"},
+          "tokenizer":{
+              "type":"FullTokenizer",
+              "split_char":" ",
+              "unk_token":"[UNK]"
+            },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": {
+            "type":"ErnieTokenEmbedding",
+            "use_reader_emb":false,
+            "emb_dim":768,
+            "config_path":"./model_files/config/ernie_2.0_large_en.config.json",
+            "other":""
+          }
+        },
+        {
+          "name": "label",
+          "data_type": "int",
+          "reader": {"type":"ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": null
+        }
+      ],
+      "config": {
+        "data_path": "./data/en/finetune/absa_laptops/test",
+        "shuffle": false,
+        "batch_size": 32,
+        "epoch": 1,
+        "sampling_rate": 1.0,
+        "extra_params":{
+          "vocab_path": "./model_files/dict/ernie_2.0_large_en.vocab.txt",
+          "label_map_config":"",
+          "max_seq_len":512,
+          "do_lower_case":true,
+          "in_tokens":false,
+          "is_classify": true,
+          "tokenizer": "FullTokenizer",
+          "data_augmentation": false, 
+          "text_field_more_than_3": false, 
+          "is_regression": false, 
+          "use_multi_gpu_test": true
+        }
+      }
+    }
+  },
+  "model": {
+    "type": "ErnieTwoSentClassificationEn",
+    "num_labels":2,
+    "embedding": {
+      "type":"ErnieTokenEmbedding",
+      "emb_dim":768,
+      "use_fp16":false,
+      "config_path":"./model_files/config/ernie_2.0_large_en.config.json",
+      "other":""
+    },
+    "is_classify": true,
+    "is_regression": false,
+    "use_bce": false,
+    "use_sigmoid": false
+  },
+  "inference": {
+    "inference_model_path": "./output/ernie_2.0_skep_large_en.absa_laptops.cls/save_inference_model/inference_step_74",
+    "test_save": "./output/inference/test_out.tsv",
+    "PADDLE_USE_GPU": 1,
+    "PADDLE_IS_LOCAL": 1
+  }
+}

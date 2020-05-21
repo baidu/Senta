@@ -1,0 +1,85 @@
+{
+  "dataset_reader": {
+    "predict_reader": {
+      "name": "predict_reader",
+      "type": "OneSentClassifyReaderCh",
+      "fields": [
+        {
+          "name": "qid",
+          "data_type": "int",
+          "reader": {
+            "type": "ScalarFieldReader"
+          },
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": null
+        },
+        {
+          "name": "label",
+          "data_type": "int",
+          "need_convert": false,
+          "reader": {
+            "type": "ScalarFieldReader"
+          },
+          "tokenizer": null,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": null
+        },
+        {
+          "name": "text_a",
+          "data_type": "string",
+          "reader": {
+            "type": "ErnieTextFieldReader"
+          },
+          "tokenizer": {
+            "type": "FullTokenizer",
+            "split_char": " ",
+            "unk_token": "[UNK]"
+          },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/ernie_1.0_large_ch.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 0,
+          "embedding": {
+            "type": "ErnieTokenEmbedding",
+            "use_reader_emb": false,
+            "emb_dim": 768,
+            "config_path": "./model_files/config/ernie_1.0_large_ch.config.json",
+            "other": ""
+          }
+        }
+      ],
+      "config": {
+        "data_path": "./data/ch/finetune/Chnsenticorp/test",
+        "shuffle": false,
+        "batch_size": 16,
+        "epoch": 1,
+        "sampling_rate": 1.0
+      }
+    }
+  },
+  "model": {
+    "type": "ErnieOneSentClassificationCh",
+    "embedding": {
+      "type": "ErnieTokenEmbedding",
+      "emb_dim": 768,
+      "use_fp16": false,
+      "config_path": "./model_files/config/ernie_1.0_large_ch.config.json",
+      "other": ""
+    }
+  },
+  "inference": {
+    "inference_model_path": "./output/ernie_1.0_skep_large_ch.Chnsenticorp.cls/save_inference_model/inference_step_601",
+    "test_save": "./output/inference/test_out.tsv",
+    "PADDLE_USE_GPU": 1,
+    "PADDLE_IS_LOCAL": 1
+  }
+}

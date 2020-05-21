@@ -1,0 +1,83 @@
+{
+  "dataset_reader": {
+    "predict_reader": {
+      "name": "predict_reader",
+      "type": "OneSentClassifyReaderEn",
+      "fields": [
+        {
+          "name": "qid",
+          "data_type": "int",
+          "reader": {"type": "ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1, 
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        },
+        {
+          "name": "text_a",
+          "data_type": "string",
+          "reader": {"type":"ErnieTextFieldReader"},
+          "tokenizer":{
+              "type":"GptBpeTokenizer",
+              "split_char":" ",
+              "unk_token":"[UNK]",
+              "params":{
+                  "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                  "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+              }
+            },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": {
+            "type":"ErnieTokenEmbedding",
+            "use_reader_emb":true,
+            "emb_dim":1024,
+            "config_path":"./model_files/config/roberta_large_en.config.json",
+            "other":""
+          }
+        },
+        {
+          "name": "label",
+          "data_type": "int",
+          "reader": {"type":"ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        }
+      ],
+      "config": {
+        "data_path": "./data/en/finetune/SST-2/test",
+        "shuffle": false,
+        "batch_size": 32,
+        "epoch": 1,
+        "sampling_rate": 1.0
+      }
+    }
+  },
+  "model": {
+    "type": "ErnieOneSentClassificationEn",
+    "embedding": {
+      "type":"ErnieTokenEmbedding",
+      "emb_dim":1024,
+      "use_fp16":false,
+      "config_path":"./model_files/config/roberta_large_en.config.json",
+      "other":""
+    }
+  },
+  "inference": {
+    "inference_model_path": "./output/roberta_skep_large_en.SST-2.cls/save_inference_model/inference_step_2106",
+    "test_save": "./output/inference/test_out.tsv",
+    "PADDLE_USE_GPU": 1,
+    "PADDLE_IS_LOCAL": 1
+  }
+}

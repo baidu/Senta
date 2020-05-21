@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*
+"""
+ErnieOneSentClassificationCh
+"""
+import logging
+from collections import OrderedDict
+import numpy as np
+from senta.common.register import RegisterSet
+from senta.common.rule import InstanceName
+from senta.models.ernie_classification import ErnieClassification
+
+
+@RegisterSet.models.register
+class ErnieOneSentClassificationCh(ErnieClassification):
+    """ErnieOneSentClassificationCh"""
+
+    def get_metrics(self, fetch_output_dict, meta_info, phase):
+        """get metrics
+        """
+        loss = fetch_output_dict[InstanceName.LOSS]
+        num_seqs = fetch_output_dict["num_seqs"]
+        accuracy = fetch_output_dict["accuracy"]
+
+        step = meta_info[InstanceName.STEP]
+        time_cost = meta_info[InstanceName.TIME_COST]
+
+        if phase == InstanceName.TRAINING:
+            logging.debug("step: %d, ave loss: %f, ave acc: %f, time_cost: %d" % (step, loss, accuracy, time_cost))
+
+        if phase == InstanceName.EVALUATE or phase == InstanceName.TEST:
+            total_cost, total_acc, total_num_seqs = 0.0, 0.0, 0.0
+            assert len(loss) == len(num_seqs) == len(accuracy), \
+                "the three results have different length !!"
+            for i in range(len(loss)):
+                total_cost += np.sum(loss[i] * num_seqs[i])
+                total_acc += np.sum(accuracy[i] * num_seqs[i])
+                total_num_seqs += np.sum(num_seqs[i])
+            logging.info(
+                "[%d_%s evaluation] ave loss: %f, ave acc: %f, data_num: %d, elapsed time: %f s"
+                % (step, phase, total_cost / total_num_seqs, total_acc / total_num_seqs,
+                   total_num_seqs, time_cost))
+        return None
+

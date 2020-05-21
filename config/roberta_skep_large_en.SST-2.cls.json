@@ -1,0 +1,245 @@
+{
+  "dataset_reader": {
+    "train_reader": {
+      "name": "train_reader",
+      "type": "OneSentClassifyReaderEn",
+      "fields": [
+        {
+          "name": "qid",
+          "data_type": "int",
+          "reader": {"type": "ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1, 
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        },
+        {
+          "name": "label",
+          "data_type": "int",
+          "reader": {"type":"ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        },
+        {
+          "name": "text_a",
+          "data_type": "string",
+          "reader": {"type":"ErnieTextFieldReader"},
+          "tokenizer":{
+              "type":"GptBpeTokenizer",
+              "split_char":" ",
+              "unk_token":"[UNK]",
+              "params":{
+                  "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                  "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+              }
+            },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": {
+            "type":"ErnieTokenEmbedding",
+            "use_reader_emb":true,
+            "emb_dim":1024,
+            "config_path":"./model_files/config/roberta_large_en.config.json"
+          }
+        }
+      ],
+      "config": {
+        "data_path": "./data/en/finetune/SST-2/train",
+        "shuffle": true,
+        "batch_size": 32,
+        "epoch": 1,
+        "sampling_rate": 1.0
+      }
+    },
+    "test_reader": {
+      "name": "test_reader",
+      "type": "OneSentClassifyReaderEn",
+      "fields": [
+        {
+          "name": "qid",
+          "data_type": "int",
+          "reader": {"type": "ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1, 
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        },
+        {
+          "name": "text_a",
+          "data_type": "string",
+          "reader": {"type":"ErnieTextFieldReader"},
+          "tokenizer":{
+              "type":"GptBpeTokenizer",
+              "split_char":" ",
+              "unk_token":"[UNK]",
+              "params":{
+                  "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                  "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+              }
+            },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": {
+            "type":"ErnieTokenEmbedding",
+            "use_reader_emb":true,
+            "emb_dim":1024,
+            "config_path":"./model_files/config/roberta_large_en.config.json",
+            "other":""
+          }
+        },
+        {
+          "name": "label",
+          "data_type": "int",
+          "reader": {"type":"ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        }
+      ],
+      "config": {
+        "data_path": "./data/en/finetune/SST-2/test",
+        "shuffle": false,
+        "batch_size": 32,
+        "epoch": 1,
+        "sampling_rate": 1.0
+      }
+    },
+    "dev_reader": {
+      "name": "dev_reader",
+      "type": "OneSentClassifyReaderEn",
+      "fields": [
+          {
+          "name": "qid",
+          "data_type": "int",
+          "reader": {"type": "ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1, 
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        },
+        {
+          "name": "label",
+          "data_type": "int",
+          "reader": {"type":"ScalarFieldReader"},
+          "tokenizer": null,
+          "need_convert": false,
+          "vocab_path": "",
+          "max_seq_len": 1,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": null
+        },  
+          {
+          "name": "text_a",
+          "data_type": "string",
+          "reader": {"type":"ErnieTextFieldReader"},
+          "tokenizer":{
+              "type":"GptBpeTokenizer",
+              "split_char":" ",
+              "unk_token":"[UNK]",
+              "params":{
+                  "bpe_vocab_file": "./model_files/dict/roberta_en.vocab.bpe",
+                  "bpe_json_file": "./model_files/dict/roberta_en.encoder.json"
+              }
+            },
+          "need_convert": true,
+          "vocab_path": "./model_files/dict/roberta_en.vocab.txt",
+          "max_seq_len": 512,
+          "truncation_type": 0,
+          "padding_id": 1,
+          "embedding": {
+            "type":"ErnieTokenEmbedding",
+            "use_reader_emb":true,
+            "emb_dim":1024,
+            "config_path":"./model_files/config/roberta_large_en.config.json",
+            "other":""
+          }
+        }
+      ],
+      "config": {
+        "data_path": "./data/en/finetune/SST-2/dev",
+        "shuffle": false,
+        "batch_size": 32,
+        "epoch": 1,
+        "sampling_rate": 1.0
+      }
+    }
+  },
+  "model": {
+    "type": "RobertaOneSentClassificationEn",
+    "embedding": {
+      "type":"ErnieTokenEmbedding",
+      "emb_dim":1024,
+      "use_fp16":false,
+      "config_path":"./model_files/config/roberta_large_en.config.json",
+      "other":""
+    },
+    "optimization":{
+      "learning_rate": 3e-5,
+      "lr_scheduler": "linear_warmup_decay",
+      "warmup_steps": 0,
+      "warmup_proportion": 0.06,
+      "weight_decay": 0,
+      "use_dynamic_loss_scaling": false,
+      "init_loss_scaling": 128,
+      "incr_every_n_steps": 100,
+      "decr_every_n_nan_or_inf": 2,
+      "incr_ratio": 2.0,
+      "decr_ratio": 0.8,
+      "use_fp16": false
+    }
+  },
+  "trainer": {
+    "type":"GlueTaskTrainer",
+    "PADDLE_USE_GPU": 1,
+    "PADDLE_IS_LOCAL": 1,
+    "is_distributed": false,
+    "vasualdl_log": false,
+    "random_seed": 1,
+    "use_fp16": false,
+    "save_inference_model": false,
+    "num_iteration_per_drop_scope": 1,
+    "use_fast_executor": true,
+    "train_log_step": 10,
+    "is_do_train": 1,
+    "is_eval_dev": 1,
+    "is_eval_test": 1,
+    "eval_step": 2000,
+    "save_model_step": 1000000,
+    "metric": "simple_accuracy", 
+    "test_save": "./output/result/test_out.tsv",
+    "load_parameters": "",
+    "load_checkpoint": 0,
+    "pre_train_model": [
+      {
+        "name": "roberta_skep_large_en",
+        "params_path": "./model_files/roberta_skep_large_en/params"
+      }
+    ],
+    "output_path": "./output/roberta_skep_large_en.SST-2.cls"
+  }
+}
