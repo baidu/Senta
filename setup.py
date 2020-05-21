@@ -42,7 +42,7 @@ setuptools.setup(
     platforms = "any",
     license='Apache 2.0',
     install_requires=[
-        "nltk == 3.4", 
+        "nltk == 3.4.5", 
         "numpy == 1.14.5",
         "six == 1.11.0",
         "scikit-learn == 0.20.4",
