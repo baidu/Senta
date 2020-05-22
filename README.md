@@ -178,7 +178,7 @@ python -m pip install Senta
 
 2. 源码安装
 ```shell
-git clone https://github.com/baidu/Senta.git .
+git clone https://github.com/baidu/Senta.git
 cd Senta
 python -m pip install .
 ```
@@ -264,7 +264,7 @@ print(result)
     
     下载代码库到本地
     ```shell
-    git clone https://github.com/baidu/Senta.git .
+    git clone https://github.com/baidu/Senta.git
     ```
 
 2. 模型下载
