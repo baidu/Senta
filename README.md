@@ -320,73 +320,73 @@ print(result)
    
     ```shell
     #  在SKEP-ERNIE1.0中文模型的基础上，继续pre-train
-    sh ./src/run_pretrain_ernie_1.0_skep_large_ch.sh
+    sh ./script/run_pretrain_ernie_1.0_skep_large_ch.sh
 
     # 在SKEP-ERNIE2.0英文模型的基础上，继续pre-train
-    sh ./src/run_pretrain_ernie_2.0_skep_large_en.sh
+    sh ./script/run_pretrain_ernie_2.0_skep_large_en.sh
 
     # 在SKEP-RoBERTa英文模型的基础上，继续pre-train
-    sh ./src/run_pretrain_roberta_skep_large_en.sh
+    sh ./script/run_pretrain_roberta_skep_large_en.sh
     ```
 
 2. Finetune训练和预测句子级情感分类任务
     
     ```shell
     # 基于SEKP-ERNIE1.0模型finetune训练和预测中文句子级情感分类任务，示例数据：ChnSentiCorp
-    sh ./src/run_train.sh ./config/ernie_1.0_skep_large_ch.Chnsenticorp.cls.json # finetune训练
-    sh ./src/run_infer.sh ./config/ernie_1.0_skep_large_ch.Chnsenticorp.infer.json # 预测
+    sh ./script/run_train.sh ./config/ernie_1.0_skep_large_ch.Chnsenticorp.cls.json # finetune训练
+    sh ./script/run_infer.sh ./config/ernie_1.0_skep_large_ch.Chnsenticorp.infer.json # 预测
     ```
     
     ```shell
     # 基于SKEP-ERNIE2.0模型finetune训练和预测英文句子级情感分类任务，示例数据：SST-2
-    sh ./src/run_train.sh ./config/ernie_2.0_skep_large_en.SST-2.cls.json # finetune训练
-    sh ./src/run_infer.sh ./config/ernie_2.0_skep_large_en.SST-2.infer.json # 预测
+    sh ./script/run_train.sh ./config/ernie_2.0_skep_large_en.SST-2.cls.json # finetune训练
+    sh ./script/run_infer.sh ./config/ernie_2.0_skep_large_en.SST-2.infer.json # 预测
     ```
     
     ```shell 
     # 基于SKEP-RoBERTa模型finetune训练和预测英文句子级情感分类任务，示例数据：SST-2
-    sh ./src/run_train.sh ./config/roberta_skep_large_en.SST-2.cls.json # finetune训练
-    sh ./src/run_infer.sh ./config/roberta_skep_large_en.SST-2.infer.json # 预测
+    sh ./script/run_train.sh ./config/roberta_skep_large_en.SST-2.cls.json # finetune训练
+    sh ./script/run_infer.sh ./config/roberta_skep_large_en.SST-2.infer.json # 预测
     ```
 
 3. Finetune训练和预测评价对象级的情感分类任务
     
     ```shell
     # 基于SKEP-ERNIE1.0模型finetune训练和预测中文评价对象级的情感分类任务，示例数据：SE-ABSA 16_PHNS
-    sh ./src/run_train.sh ./config/ernie_1.0_skep_large_ch.SE-ABSA16_PHNS.cls.json # finetune训练
-    sh ./src/run_infer.sh ./config/ernie_1.0_skep_large_ch.SE-ABSA16_PHNS.infer.json # 预测
+    sh ./script/run_train.sh ./config/ernie_1.0_skep_large_ch.SE-ABSA16_PHNS.cls.json # finetune训练
+    sh ./script/run_infer.sh ./config/ernie_1.0_skep_large_ch.SE-ABSA16_PHNS.infer.json # 预测
     ```
     
     ```shell 
     # 基于SEKP-ERNIE2.0模型finetune训练和预测英文评价对象级的情感分类任务，示例数据：Sem-L
-    sh ./src/run_train.sh ./config/ernie_2.0_skep_large_en.absa_laptops.cls.json # finetune训练
-    sh ./src/run_infer.sh ./config/ernie_2.0_skep_large_en.absa_laptops.infer.json # 预测
+    sh ./script/run_train.sh ./config/ernie_2.0_skep_large_en.absa_laptops.cls.json # finetune训练
+    sh ./script/run_infer.sh ./config/ernie_2.0_skep_large_en.absa_laptops.infer.json # 预测
     ```
     
     ```shell 
     # 基于SKEP-RoBERTa模型finetune训练和预测英文评价对象级的情感分类任务，示例数据：Sem-L
-    sh ./src/run_train.sh ./config/roberta_skep_large_en.absa_laptops.cls.json # finetune训练
-    sh ./src/run_infer.sh ./config/roberta_skep_large_en.absa_laptops.infer.json # 预测
+    sh ./script/run_train.sh ./config/roberta_skep_large_en.absa_laptops.cls.json # finetune训练
+    sh ./script/run_infer.sh ./config/roberta_skep_large_en.absa_laptops.infer.json # 预测
     ```
 
 4. Finetune训练和预测观点抽取或标注任务
     
     ```shell
     # 基于SKEP-ERNIE1.0模型finetune训练和预测中文观点抽取任务，示例数据：COTE_BD
-    sh ./src/run_train.sh ./config/ernie_1.0_skep_large_ch.COTE_BD.oe.json # finetune训练
-    sh ./src/run_infer.sh ./config/ernie_1.0_skep_large_ch.COTE_BD.infer.json # 预测
+    sh ./script/run_train.sh ./config/ernie_1.0_skep_large_ch.COTE_BD.oe.json # finetune训练
+    sh ./script/run_infer.sh ./config/ernie_1.0_skep_large_ch.COTE_BD.infer.json # 预测
     ```
     
     ```shell
     # 基于SKEP-ERNIE2.0模型finetune训练和预测英文观点抽取任务，示例数据：MPQA 
-    sh ./src/run_train.sh ./config/ernie_2.0_skep_large_en.MPQA.orl.json # finetune训练
-    sh ./src/run_infer.sh ./config/ernie_2.0_skep_large_en.MPQA.infer.json # 预测
+    sh ./script/run_train.sh ./config/ernie_2.0_skep_large_en.MPQA.orl.json # finetune训练
+    sh ./script/run_infer.sh ./config/ernie_2.0_skep_large_en.MPQA.infer.json # 预测
     ```
     
     ```shell 
     # 基于SKEP-RoBERTa模型finetune训练和预测英文观点抽取任务，示例数据：MPQA
-    sh ./src/run_train.sh ./config/roberta_skep_large_en.MPQA.orl.json # finetune训练
-    sh ./src/run_infer.sh ./config/roberta_skep_large_en.MPQA.infer.json # 预测
+    sh ./script/run_train.sh ./config/roberta_skep_large_en.MPQA.orl.json # finetune训练
+    sh ./script/run_infer.sh ./config/roberta_skep_large_en.MPQA.infer.json # 预测
     ```
 
 5. 该代码同时支持用户进一步开发使用，可以根据配置文件中设置相关数据、模型、优化器，以及修改模型的超参数进行二次开发训练。
@@ -469,16 +469,16 @@ print(result)
 sh download_roberta_skep_large_en.sh
 
 #基于SKEP-RoBERTa模型finetune训练和预测英文句子级情感分类任务（示例数据：SST-2）
-sh ./src/run_train.sh ./config/roberta_skep_large_en.SST-2.cls.json # finetune训练
-sh ./src/run_infer.sh ./config/roberta_skep_large_en.SST-2.infer.json # 预测
+sh ./script/run_train.sh ./config/roberta_skep_large_en.SST-2.cls.json # finetune训练
+sh ./script/run_infer.sh ./config/roberta_skep_large_en.SST-2.infer.json # 预测
 
 #基于SKEP-RoBERTa模型finetune训练和预测英文评价对象级的情感分类任务（示例数据：Sem-L）
-sh ./src/run_train.sh ./config/roberta_skep_large_en.absa_laptops.cls.json # finetune训练
-sh ./src/run_infer.sh ./config/roberta_skep_large_en.absa_laptops.infer.json # 预测
+sh ./script/run_train.sh ./config/roberta_skep_large_en.absa_laptops.cls.json # finetune训练
+sh ./script/run_infer.sh ./config/roberta_skep_large_en.absa_laptops.infer.json # 预测
 
 #基于SKEP-RoBERTa模型finetune训练和预测英文观点抽取任务（示例数据：MPQA）
-sh ./src/run_train.sh ./config/roberta_skep_large_en.MPQA.orl.json # finetune训练
-sh ./src/run_infer.sh ./config/roberta_skep_large_en.MPQA.infer.json # 预测
+sh ./script/run_train.sh ./config/roberta_skep_large_en.MPQA.orl.json # finetune训练
+sh ./script/run_infer.sh ./config/roberta_skep_large_en.MPQA.infer.json # 预测
 ```
 
 注：如需要复现论文数据集结果，请参考论文修改对应任务的参数设置。
