@@ -27,7 +27,7 @@ class Vocabulary(object):
         """
         vocab_dict = collections.OrderedDict()
         id_dict = collections.OrderedDict()
-        file_vocab = open(self.vocab_path)
+        file_vocab = open(self.vocab_path, encoding='utf-8')
         for num, line in enumerate(file_vocab):
             items = convert_to_unicode(line.strip()).split("\t")
             if len(items) > 2:
