@@ -1,3 +1,5 @@
+[English](https://github.com/baidu/Senta/blob/master/README.en.md)|简体中文
+
 # 情感分析
 
 ## 目录
@@ -488,12 +490,23 @@ sh ./script/run_infer.sh ./config/roberta_skep_large_en.MPQA.infer.json # 预测
 如需使用该项目中的代码、模型或是方法，请在相关文档、论文中引用我们的工作。
 
 ```text
-@misc{tian2020skep,
-    title={SKEP: Sentiment Knowledge Enhanced Pre-training for Sentiment Analysis},
-    author={Hao Tian and Can Gao and Xinyan Xiao and Hao Liu and Bolei He and Hua Wu and Haifeng Wang and Feng Wu},
-    year={2020},
-    eprint={2005.05635},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+@inproceedings{tian-etal-2020-skep,
+    title = "{SKEP}: Sentiment Knowledge Enhanced Pre-training for Sentiment Analysis",
+    author = "Tian, Hao  and
+      Gao, Can  and
+      Xiao, Xinyan  and
+      Liu, Hao  and
+      He, Bolei  and
+      Wu, Hua  and
+      Wang, Haifeng  and
+      wu, feng",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.374",
+    pages = "4067--4076",
+    abstract = "Recently, sentiment analysis has seen remarkable advance with the help of pre-training approaches. However, sentiment knowledge, such as sentiment words and aspect-sentiment pairs, is ignored in the process of pre-training, despite the fact that they are widely used in traditional sentiment analysis approaches. In this paper, we introduce Sentiment Knowledge Enhanced Pre-training (SKEP) in order to learn a unified sentiment representation for multiple sentiment analysis tasks. With the help of automatically-mined knowledge, SKEP conducts sentiment masking and constructs three sentiment knowledge prediction objectives, so as to embed sentiment information at the word, polarity and aspect level into pre-trained sentiment representation. In particular, the prediction of aspect-sentiment pairs is converted into multi-label classification, aiming to capture the dependency between words in a pair. Experiments on three kinds of sentiment tasks show that SKEP significantly outperforms strong pre-training baseline, and achieves new state-of-the-art results on most of the test datasets. We release our code at https://github.com/baidu/Senta.",
 }
 ```
