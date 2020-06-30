@@ -1,6 +1,6 @@
 [English](https://github.com/baidu/Senta/blob/master/README.en.md)|简体中文
 
-# 情感分析
+# <p align=center>`Senta`</p>
 
 ## 目录
 - [简介](#简介)

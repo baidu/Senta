@@ -8,7 +8,7 @@ English|[简体中文](https://github.com/baidu/Senta/blob/master/README.md)
 
 ### Pip
 
-You can directly use the Python package to predict sentiment analysis tasks, by loading a pre-trained skep model.
+You can directly use the Python package to predict sentiment analysis tasks by loading a pre-trained `SKEP` model.
 
 #### Installation
 
@@ -64,6 +64,8 @@ You can directly use the Python package to predict sentiment analysis tasks, by 
 
 ### From source
 
+You can use the source code to run pre-training and fine-tuning tasks. The `config` folder has different files to help you reproduce the results of our paper.
+
 #### Preparation
 
     ```shell
@@ -91,7 +93,7 @@ You can directly use the Python package to predict sentiment analysis tasks, by 
     python -m pip install -r requirements.txt
     ```
 
-3. Set up environment variables such as Python, CUDA, cuDNN, PaddlePaddle in ./env.sh file. Details about environment variables related to PaddlePaddle can be found at the [PaddlePaddle Documentation](https://www.paddlepaddle.org.cn/documentation/docs/en/1.6/flags_en.html).
+3. Set up environment variables such as Python, CUDA, cuDNN, PaddlePaddle in `env.sh` file. Details about environment variables related to PaddlePaddle can be found at the [PaddlePaddle Documentation](https://www.paddlepaddle.org.cn/documentation/docs/en/1.6/flags_en.html).
 
 #### Quick Tour
 
@@ -114,32 +116,32 @@ You can directly use the Python package to predict sentiment analysis tasks, by 
     sh ./script/run_infer.sh ./config/roberta_skep_large_en.MPQA.infer.json # predict
     ```
     
-3. An old version of Senta can be found at [here](https://github.com/baidu/Senta/tree/v1), which includes BoW, CNN and BiLSTM models for Chinese sentence-level sentiment classification.
+3. An old version of `Senta` can be found at [here](https://github.com/baidu/Senta/tree/v1), which includes BoW, CNN and BiLSTM models for Chinese sentence-level sentiment classification.
 
 
 ## Citation
 
 If you extend or use this work, please cite the [paper](https://www.aclweb.org/anthology/2020.acl-main.374.pdf) where it was introduced:
 
-    ```text
-    @inproceedings{tian-etal-2020-skep,
-        title = "{SKEP}: Sentiment Knowledge Enhanced Pre-training for Sentiment Analysis",
-        author = "Tian, Hao  and
-          Gao, Can  and
-          Xiao, Xinyan  and
-          Liu, Hao  and
-          He, Bolei  and
-          Wu, Hua  and
-          Wang, Haifeng  and
-          wu, feng",
-        booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
-        month = jul,
-        year = "2020",
-        address = "Online",
-        publisher = "Association for Computational Linguistics",
-        url = "https://www.aclweb.org/anthology/2020.acl-main.374",
-        pages = "4067--4076",
-        abstract = "Recently, sentiment analysis has seen remarkable advance with the help of pre-training approaches. However, sentiment knowledge, such as sentiment words and aspect-sentiment pairs, is ignored in the process of pre-training, despite the fact that they are widely used in traditional sentiment analysis approaches. In this paper, we introduce Sentiment Knowledge Enhanced Pre-training (SKEP) in order to learn a unified sentiment representation for multiple sentiment analysis tasks. With the help of automatically-mined knowledge, SKEP conducts sentiment masking and constructs three sentiment knowledge prediction objectives, so as to embed sentiment information at the word, polarity and aspect level into pre-trained sentiment representation. In particular, the prediction of aspect-sentiment pairs is converted into multi-label classification, aiming to capture the dependency between words in a pair. Experiments on three kinds of sentiment tasks show that SKEP significantly outperforms strong pre-training baseline, and achieves new state-of-the-art results on most of the test datasets. We release our code at https://github.com/baidu/Senta.",
-    }
-    ```
+```text
+@inproceedings{tian-etal-2020-skep,
+    title = "{SKEP}: Sentiment Knowledge Enhanced Pre-training for Sentiment Analysis",
+    author = "Tian, Hao  and
+      Gao, Can  and
+      Xiao, Xinyan  and
+      Liu, Hao  and
+      He, Bolei  and
+      Wu, Hua  and
+      Wang, Haifeng  and
+      wu, feng",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.374",
+    pages = "4067--4076",
+    abstract = "Recently, sentiment analysis has seen remarkable advance with the help of pre-training approaches. However, sentiment knowledge, such as sentiment words and aspect-sentiment pairs, is ignored in the process of pre-training, despite the fact that they are widely used in traditional sentiment analysis approaches. In this paper, we introduce Sentiment Knowledge Enhanced Pre-training (SKEP) in order to learn a unified sentiment representation for multiple sentiment analysis tasks. With the help of automatically-mined knowledge, SKEP conducts sentiment masking and constructs three sentiment knowledge prediction objectives, so as to embed sentiment information at the word, polarity and aspect level into pre-trained sentiment representation. In particular, the prediction of aspect-sentiment pairs is converted into multi-label classification, aiming to capture the dependency between words in a pair. Experiments on three kinds of sentiment tasks show that SKEP significantly outperforms strong pre-training baseline, and achieves new state-of-the-art results on most of the test datasets. We release our code at https://github.com/baidu/Senta.",
+}
+```
     
