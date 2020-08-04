@@ -278,7 +278,7 @@ class Senta(object):
         else:
             for text, probs in zip(texts_, batch_result):
                 label = self.label_map[np.argmax(probs)]
-                results.append((text, label))
+                results.append((text, label,probs))
         return results
 
     def train(self, json_path):
