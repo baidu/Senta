@@ -28,7 +28,7 @@ with open("README.md", "r", encoding="UTF-8") as fh:
 
 setuptools.setup(
     name="Senta",
-    version="2.0.0",
+    version="2.0.1",
     author="Baidu NLP",
     author_email="gaocan01@baidu.com",
     description="A sentiment classification tools made by Baidu NLP.",
