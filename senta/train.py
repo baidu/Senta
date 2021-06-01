@@ -180,7 +180,8 @@ class Senta(object):
         tasks = list(self._params.get("task_name").keys())
         return tasks
 
-    def init_model(self, model_class="ernie_1.0_skep_large_ch", task="sentiment_classify", use_cuda=False):
+    def init_model(
+            self, model_class="ernie_1.0_skep_large_ch", task="sentiment_classify", use_cuda=False, load_locally=False):
         """
         init_model
         """
@@ -192,7 +193,8 @@ class Senta(object):
         # step 1: get_init_model, if download
         data_url = model_dict.get("model_file_http_url")
         md5_url = model_dict.get("model_md5_http_url")
-        is_download_data = download_data(data_url, md5_url)
+        if not load_locally:
+            is_download_data = download_data(data_url, md5_url)
 
         # step 2 get model_class
         register.import_modules()
