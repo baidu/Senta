@@ -45,7 +45,7 @@ setuptools.setup(
         "nltk == 3.4.5", 
         "numpy == 1.14.5",
         "six == 1.11.0",
-        "scikit-learn == 0.20.4",
+        "scikit-learn == 1.5.0",
         "sentencepiece == 0.1.83"],
     python_requires='>=3.7',
     classifiers = [
